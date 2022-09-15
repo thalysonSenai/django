@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def home(requeste):
     return render(requeste,'home.html', {})
+    
+def pagteste(requeste):
+    return render(requeste,'pagteste.html', {})
