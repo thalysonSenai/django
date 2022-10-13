@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Brawler:display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-body: #121212;
+  --bg-body-800: #222222;
+  --bg-body-500: #555555;
+  --bg-button: #ffa500;
+  --text-link-color: #ffa500;
+  --text-color: #fff;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--bg-body);
+  color: var(--text-color);
+  font-family: "Brawler", serif;
+
+  height: 99vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  max-width: 1000px;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 50px 15px 10px 15px;
+
+  background-color: var(--bg-body-800);
+
+  border: none;
+  border-radius: 15px;
+}
+
+.form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 20px;
+  margin-left: 15px;
+}
+
+.form > div > input {
+  width: 250px;
+  height: 30px;
+  padding: 0 10px;
+  margin: 10px;
+
+  border: none;
+  border-radius: 20px;
+
+  box-sizing: border-box;
+
+  background-color: var(--bg-body-500);
+  color: var(--text-color);
+}
+
+.button {
+  width: 125px;
+  height: 50px;
+  margin: 20px;
+
+  border: none;
+  border-radius: 40px 0 40px 0;
+
+  background-color: var(--bg-button);
+}
+
+.button:hover {
+  transform: scale(1.1, 1.1);
+  transition: ease-in .5s;
+}
+
+.img {
+  width: 60%;
+}
+
+.links {
+  margin: 10px 0 35px 0;
+}
+
+.links > p > a {
+  color: var(--text-link-color);
+}
+
+@media (max-width: 750px) {
+  body {
+    background-image: url("https://i.imgur.com/lQ5bqwq.png");
+    background-size: 100%;
+    background-position: center;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .img {
+    display: none;
+  }
+}

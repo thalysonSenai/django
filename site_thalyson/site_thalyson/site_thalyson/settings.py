@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--m-pt(i!lmhqiad65lrm2u!7csl$nor)dxt_f2(7i)4cjxguvx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'thalyson12.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost','thalyson12.pythonanywhere.com']
 
 
 # Application definition
@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'site_thalyson.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'teste',
+        'USER': 'root',
+        'PASSWORD':'Senai2019,',
+        'HOST':'localhost',
+        'PORT':'3306'
     }
 }
 
@@ -117,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
