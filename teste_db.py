@@ -1,4 +1,4 @@
-from xml.etree.ElementInclude import include
+""" from xml.etree.ElementInclude import include
 import mysql.connector
 from mysql.connector import errorcode
 
@@ -23,4 +23,8 @@ cursor.execute('select name from city where id = 212')
 if cidade in cursor:
 	print(cursor)
 	print("essa cidade do brasil")
+ """
 
+u = {}
+u["nome"] = "thalyson"
+print(u['nome'])

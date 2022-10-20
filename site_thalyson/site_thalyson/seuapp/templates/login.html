@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'form.css' %}">
     <title>Login</title>
-    
+
 </head>
 <body>
     <div class="content">
@@ -15,10 +15,10 @@
             <h2>
                 ModernSaloon
             </h2>
-            <form class="form" name="cad_user" method="post" action="/docade/"method="post" action="./">
+            <form class="form" name="log_user" method="post" action="/dolog/"method="post" action="./">
                 {% csrf_token %}
                 <div>
-                    <label class="label">Email</label>
+                    <label class="label">Usuário</label>
                     {{login.usuario}}
                 </div>
                 <div>
@@ -26,14 +26,14 @@
                     {{login.senha}}
                 </div>
                 <button type="submit" class="button">Entrar</button>
-    
+
                 <div class="links">
                     <p><a href = "{% url 'cadastro' %}">Registrar</a> ou <a href = "{% url 'esqueceuSenha' %}">esqueceu a senha</a></p>
                 </div>
             </form>
         </div>
         <img class="img" src="https://i.imgur.com/Wek66XX.png">
-    
+
     </div>
 
     <script>

@@ -1,4 +1,6 @@
 import email
+from http.client import HTTPResponse
+
 from django.shortcuts import render, redirect
 from seuapp.forms import UsersForm, LoginForm
 from seuapp.models import Usuario
@@ -8,8 +10,13 @@ from seuapp.models import Usuario
 
 
 def home(request):
-	tabela = Usuario.objects.all()
-	return render(request,'home.html', {'usuario':tabela})
+	try:
+		profile = {}
+		profile['uid'] = Usuario.objects.get(id=request.session['uid'])
+		print(profile)
+	except:
+		return render(request,'home.html')
+	return render(request,'home.html', profile)
 
 def cadastro(request):
 	data = {}
@@ -29,7 +36,11 @@ def esqueceuSenha(request):
 def novaSenha(request):
 	data = {}
 	data['novaSenha'] = UsersForm()
-	return render(request,'novaSenha.html',data)	
+	return render(request,'novaSenha.html',data)
+
+def errorLogin(request):
+	data = {}
+	return render(request,'errorLogin.html',data)
 
 def docad(request):
 	data = {}
@@ -38,21 +49,35 @@ def docad(request):
 	erro = ''
 	for c in tabela:
 		if form['usuario'].data == c.usuario :
-			erro = "mensagem de erro"
+			return render(request,'userError.html', data)
+	for c in tabela:
+		if form['email'].data == c.email :
+			return render(request,'userError.html', data)
+	for c in tabela:
+		if form['tel'].data == c.tel:
 			return render(request,'userError.html', data)
 	if form.is_valid() and erro == '':
 		form.save()
 	return render(request,'registerSucces.html', data)
 
 
-def docade(request):
-	data = {}
-	tabela = Usuario.objects.all()
-	form = LoginForm(request.POST or None)
-	erro = ''
-	for c in tabela:
-		if form['usuario'].data == c.usuario and form['senha'].data == c.senha:
-			return redirect('home')	
+def dolog(request):
+	if request.method == "POST":
+		try:
+			u = Usuario.objects.get(usuario=request.POST['usuario'])
+		except:
+			return redirect("errorLogin")
+		print(u.usuario)
+		if u.senha == request.POST['senha']:
+			request.session['uid'] = u.id
+			return redirect('home')
+		else:
+			return redirect("errorLogin")
+	else: 
+		return redirect ('login')
+	
+
+
 
 
 
