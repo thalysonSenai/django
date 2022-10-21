@@ -7,15 +7,23 @@ from seuapp.models import Usuario
 
 
 # Create your views here.
-
+def dologout(request):
+	try:
+		del request.session['uid']
+		return redirect ("logout")
+	except KeyError:
+		pass
+	return render(request, "home.html")
+	
 
 def home(request):
+	profile = {}
 	try:
-		profile = {}
 		profile['uid'] = Usuario.objects.get(id=request.session['uid'])
+		profile['custom'] = "LOGOUT"
 		print(profile)
-	except:
-		return render(request,'home.html')
+	except KeyError:
+		profile['custom'] = "LOGIN"
 	return render(request,'home.html', profile)
 
 def cadastro(request):
@@ -41,6 +49,11 @@ def novaSenha(request):
 def errorLogin(request):
 	data = {}
 	return render(request,'errorLogin.html',data)
+
+
+def logout(request):
+	data = {}
+	return render(request,'logout.html',data)
 
 def docad(request):
 	data = {}

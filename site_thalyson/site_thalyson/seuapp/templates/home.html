@@ -14,7 +14,11 @@
             <h1>ModernSaloon</h1>
             <nav>
               <ul>
-                <li><a href="{% url 'login' %}">Login</a></li>
+                <li>{% if custom == "LOGOUT" %}
+                  <a href="/dologout/">{{custom}}</a>
+                  {% else %}
+                  <a href ="/login/">{{custom}}</a>
+                  {% endif %}</li>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Sobre</a></li>
                 <li><a href="#">Cortes</a></li>
@@ -41,5 +45,12 @@
             <img src="https://i.imgur.com/8JUEUOz.png">
           </div>
     </div>
+    <script>
+      let btn = document.getElementById("btn");
+
+      btn.addEventListener("click", () => {
+          window.location.href = "/dologout/"
+      })
+  </script>
 </body>
 </html>
