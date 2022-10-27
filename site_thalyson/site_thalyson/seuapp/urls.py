@@ -10,9 +10,9 @@ urlpatterns = [
     path('esqueceuSenha/', views.esqueceuSenha, name='esqueceuSenha'),
     path('novaSenha/', views.novaSenha, name='novaSenha'),
     path('errorLogin/', views.errorLogin, name='errorLogin'),
+    path('errorEditar/', views.errorEditar, name='errorEditar'),
     path('dologout/', views.dologout, name='dologout'),
     path('logout/', views.logout, name='logout'),
-
-
-
+    path('perfil/', views.profile, name='perfil'),
+    path('doupdate/', views.doupdate, name='doupdate'),
 ]

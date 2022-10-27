@@ -37,6 +37,9 @@
                     <label class="label">Confirmar senha</label>
                     {{form.confirma_senha}}
                 </div>
+                <div style="display: none">
+                    {{form.confirma_nova_senha}}
+                </div>
                 <div id="result">
     
                 </div>
@@ -45,46 +48,13 @@
         </div>
         <img class="img" src="https://i.imgur.com/lQ5bqwq.png">
     </div>
+
+    <script type="text/javascript" src="{% static 'js/cadastro.js' %}"></script>
     <script>
-        let input1 = document.getElementById("id_confirma_senha");
-        input1.setAttribute("onkeyup", "confereSenha()")
-        let input2 = document.getElementById("id_senha");
-        input2.setAttribute("onkeyup", "confereSenha()")
+        let input = document.getElementById("id_confirma_nova_senha");
 
-        function confereSenha() {
-            let senha1 = document.getElementById("id_senha");
-            let senha2 = document.getElementById("id_confirma_senha");
-            let btn = document.getElementById("btn");
-
-            let result = document.getElementById("result");
-
-            if(senha1.value != senha2.value || senha2.value != senha1.value) {
-                result.innerText = "As senhas não conferem"
-                btn.disabled = true
-            } else {
-                result.innerText = ""
-                btn.disabled = false
-            }
-
-            if(senha2.value == "") {
-                result.innerText = ""
-            }
-
-            if(senha1.value == "" || senha2.value == "") {
-                btn.disabled = true
-            }
-        }
-
-        
-        
-        let tel = document.getElementById("id_tel");
-        tel.setAttribute("onkeyup", "regexNumber()")
-        
-        function regexNumber() {
-            let num = [/0-9/];
-
-            console.log(num.test(tel.value))
-        }
+        input.required = false
+        input.value = "oi"
     </script>
 </body>
 </html>

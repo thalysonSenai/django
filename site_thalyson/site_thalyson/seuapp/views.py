@@ -1,5 +1,7 @@
 import email
+from faulthandler import disable
 from http.client import HTTPResponse
+from operator import truediv
 
 from django.shortcuts import render, redirect
 from seuapp.forms import UsersForm, LoginForm
@@ -20,10 +22,10 @@ def home(request):
 	profile = {}
 	try:
 		profile['uid'] = Usuario.objects.get(id=request.session['uid'])
-		profile['custom'] = "LOGOUT"
+		profile['custom'] = "Sair"
 		print(profile)
 	except KeyError:
-		profile['custom'] = "LOGIN"
+		profile['custom'] = "Entrar"
 	return render(request,'home.html', profile)
 
 def cadastro(request):
@@ -35,6 +37,7 @@ def login(request):
 	data = {}
 	data['login'] = LoginForm()
 	return render(request,'login.html',data)
+
 
 def esqueceuSenha(request):
 	data = {}
@@ -49,6 +52,10 @@ def novaSenha(request):
 def errorLogin(request):
 	data = {}
 	return render(request,'errorLogin.html',data)
+
+def errorEditar(request):
+	data = {}
+	return render(request,'errorEditar.html',data)
 
 
 def logout(request):
@@ -89,8 +96,27 @@ def dolog(request):
 	else: 
 		return redirect ('login')
 	
+def profile(request):
+	profile = {}
+	try:
+		profile['perfil'] = UsersForm(instance=Usuario.objects.get(id=request.session['uid']))
+		return render(request, 'novaSenha.html', profile)
+	except:
+		return HTTPResponse("vc não está logado")
+	
 
+def doupdate(request):
 
+	form = Usuario.objects.get(id=request.session['uid'])
+	if request.POST['confirma_senha'] == form.senha:
+		form.senha = request.POST['senha']
+		form.usuario = request.POST['usuario']
+		form.email = request.POST['email']
+	else:
+		return redirect('errorEditar')
+	form.save()
+	return redirect ('home')
+	
 
 
 

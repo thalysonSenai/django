@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-body: #121212;
+    --bg-body-800: #222222;
+    --bg-body-500: #555555;
+    --bg-button: #ffa500;
+    --text-link-color: #ffa500;
+    --text-color: #fff;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--text-color);
+    font-family: "Brawler", serif;
+
+    height: 99vh;
+    background-color: var(--bg-body);
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-body-800);
+
+    padding: 40px;
+    margin: 0 20px;
+
+    border-radius: 15px;
+}
+
+.error>p {
+    font-size: 3rem;
+}
+
+.button {
+    width: 125px;
+    height: 50px;
+    margin: 20px;
+
+    border: none;
+    border-radius: 40px 0 40px 0;
+
+    background-color: var(--bg-button);
+}
+
+.button:hover {
+    transform: scale(1.1, 1.1);
+    transition: ease-in .5s;
+}

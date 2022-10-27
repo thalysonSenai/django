@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="{% static 'erro.css' %}">
-  <title>Usuário ou senha inválidos</title>
+  <title>Senha atual incorreta</title>
 </head>
 
 <body>
   <div class="error">
-    <p>Usuário ou Senha inválidos</p>
+    <p>Senha atual incorreta</p>
     <button id="result" class="button">3</button>
   </div>
 
@@ -31,7 +31,7 @@
         setTimeout(() => { contTimer() }, 1000)
       } else if (count == 2) {
         result.innerText = "1"
-        window.location.href = "/login/"
+        window.location.href = "/perfil/"
       }
     }
 

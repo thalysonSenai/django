@@ -14,10 +14,13 @@
             <h1>ModernSaloon</h1>
             <nav>
               <ul>
-                <li>{% if custom == "LOGOUT" %}
+                <li>{% if custom == "Sair" %}
                   <a href="/dologout/">{{custom}}</a>
+                  <a href="/perfil/">editar perfil</a>
                   {% else %}
+
                   <a href ="/login/">{{custom}}</a>
+
                   {% endif %}</li>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Sobre</a></li>

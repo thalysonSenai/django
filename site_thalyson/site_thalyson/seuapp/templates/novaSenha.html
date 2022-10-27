@@ -1,6 +1,7 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,26 +9,49 @@
     <link rel="stylesheet" href="{% static 'form.css' %}">
     <title>Alterar senha</title>
 </head>
+
 <body>
-    <div class="left-content">
-        <h2>
-            ModernSaloon
-        </h2>
-        <form action="" class="form">
-            <div>
-                <label class="label">Nova senha</label>
-                <input type="password" class="input">
-            </div>
+    <div class="content">
+        <div class="left-content">
+            <h2>
+                ModernSaloon
+            </h2>
+            <form action="/doupdate/" class="form" method="post">
+                {% csrf_token %}
+                <div>
+                    <label class="label">Novo usuario</label>
+                    {{perfil.usuario}}
+                </div>
 
-            <div>
-                <label class="label">Confirmar senha</label>
-                <input type="password" class="input">
-            </div>
+                <div>
+                    <label class="label">Novo email</label>
+                    {{perfil.email}}
+                </div>
 
-            <button type="submit" class="button">Enviar</button>
+                <div>
+                    <label class="label">Senha atual</label>
+                    {{perfil.confirma_senha}}
+                </div>
 
-        </form>
+                <div>
+                    <label class="label">Nova senha</label>
+                    {{perfil.senha}}
+                </div>
+
+                <div>
+                    <label class="label">Confirmar nova senha</label>
+                    {{perfil.confirma_nova_senha}}
+                </div>
+
+                <div id="result"></div>
+
+                <button type="submit" class="button" id="btn" disabled="true">Atualizar</button>
+
+            </form>
+        </div>
+        <img class="img" src="https://i.imgur.com/ooaBjFH.png">
     </div>
-    <img class="img" src="https://i.imgur.com/ooaBjFH.png">
+    <script type="text/javascript" src="{% static 'js/editar.js' %}"></script>
 </body>
+
 </html>

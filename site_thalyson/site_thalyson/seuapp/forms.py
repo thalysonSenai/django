@@ -9,11 +9,12 @@ from seuapp.models import Usuario
 class UsersForm(ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput)
     confirma_senha = forms.CharField(widget=forms.PasswordInput)
+    confirma_nova_senha = forms.CharField(widget=forms.PasswordInput)
     nascimento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     class Meta:
         model = Usuario
         widgets = {'password': forms.PasswordInput(),}
-        fields = ['usuario', 'email', 'senha', 'confirma_senha', 'tel', 'nascimento']
+        fields = ['usuario', 'email', 'senha', 'confirma_senha','confirma_nova_senha','tel', 'nascimento']
 
 class LoginForm(ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput)
@@ -22,4 +23,9 @@ class LoginForm(ModelForm):
         widgets = {'password': forms.PasswordInput(),}
         fields = ['usuario', 'senha']
 
-        
+
+
+
+
+
+
