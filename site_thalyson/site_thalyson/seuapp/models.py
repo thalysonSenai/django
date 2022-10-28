@@ -8,5 +8,3 @@ class Usuario(models.Model):
     tel = models.CharField(max_length=15)
     senha = models.CharField(max_length=16)
 
-
-

@@ -1,59 +1,245 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <title>Homepage</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <title>Homepage</title>
 </head>
+
 <body>
-    <div class="content">
-        <header>
-            <h1>ModernSaloon</h1>
-            <nav>
-              <ul>
-                <li>{% if custom == "Sair" %}
-                  <a href="/dologout/">{{custom}}</a>
-                  <a href="/perfil/">editar perfil</a>
-                  {% else %}
+  <div class="up" id="up">
+    <img src="https://i.imgur.com/xTiIyi9.png">
+  </div>
 
-                  <a href ="/login/">{{custom}}</a>
+  <div class="content" id="home">
+    <header class="header">
 
-                  {% endif %}</li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Cortes</a></li>
-                <li><a href="#">Equipe</a></li>
-                <li><a href="#">Produtos</a></li>
-                <li><a href="#">Agendamentos</a></li>
-              </ul>
-            </nav>
-          </header>
-    
-          <div class="body-header">
-            <div>
-                <p>
-                    {{uid.usuario}}
-                    <p>Saloon</p>
-                    <p>Barbearia</p>
-                </p>
-            </div>
+      <!--page title-->
+      <h1>ModernSaloon</h1>
 
-            <img src="https://i.imgur.com/eEuXeAQ.png">
-          </div>
+      <nav class="nav_header">
 
-          <div class="body">
-            <img src="https://i.imgur.com/8JUEUOz.png">
-          </div>
+        <ul>
+          <!--list header-->
+          <li><a href="#home">Home</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#cortes">Cortes</a></li>
+          <li><a href="#equipe">Equipe</a></li>
+          <li><a href="#produtos">Produtos</a></li>
+          <li><a href="#agendamentos">Agendamentos</a></li>
+          {% if custom == "Sair" %}
+          <li><img width="15px" src="https://i.imgur.com/VbRkrx4.png" id="user"></li>
+          {% else %}
+          <li color="orange"><a href="/login/">{{custom}}</a></li>
+          {%endif%}
+        </ul>
+        <!--list header-->
+
+        <div class="userCard" id="userCard">
+          <span>{{uid.usuario}}</span>
+
+          {% if custom == "Sair" %}
+          <nav>
+            <li><a href="/perfil/">Editar perfil</a></li>
+            <li><a href="/dologout/">{{custom}}</a></li>
+          </nav>
+          {%endif%}
+        </div>
+        <!--userCard-->
+
+      </nav>
+      <!--nav_header-->
+
+    </header>
+    <!--header-->
+
+    <div class="body-header">
+      <div>
+        <p>Saloon</p>
+        <p>Barbearia</p>
+      </div>
+
+      <img src="https://i.imgur.com/eEuXeAQ.png">
     </div>
-    <script>
-      let btn = document.getElementById("btn");
+    <!--body_header-->
 
-      btn.addEventListener("click", () => {
-          window.location.href = "/dologout/"
-      })
-  </script>
+    <div class="about" id="sobre">
+      <img src="https://i.imgur.com/GJefIvz.png">
+      <div class="about_content">
+        <p>Sobre</p>
+        <p>Modern saloon, empresa criada em 2005 deixando milhares de crientes satisfeitos.</p>
+      </div>
+      <!--about_content-->
+    </div>
+    <!--about-->
+
+    <div class="cortes" id="cortes">
+      <img src="https://i.imgur.com/bAsTVbA.png">
+      <div class="cortes_content">
+        <ul>
+          <li>Navalhado</li>
+          <li>Tesoura</li>
+          <li>Máquina</li>
+          <li>Tesoura e máquina</li>
+          <li>Degradê</li>
+        </ul>
+      </div>
+      <!--contes_content-->
+    </div>
+    <!--cortes-->
+
+    <div class="equipe" id="equipe">
+      <div class="equipe_header">
+        <p>Quem trabalha comigo</p>
+        <p>Meu time</p>
+      </div>
+      <!--equipe header-->
+      <div class="cards_content">
+
+        <div class="card">
+          <p></p>
+          <img src="https://i.imgur.com/SjACOUT.png">
+        </div>
+        <!--card-->
+
+        <div class="card">
+          <p></p>
+          <img src="https://i.imgur.com/SjACOUT.png">
+        </div>
+        <!--card-->
+
+        <div class="card">
+          <p></p>
+          <img src="https://i.imgur.com/SjACOUT.png">
+        </div>
+        <!--card-->
+
+      </div>
+      <!--cards content-->
+    </div>
+    <!--equipe-->
+
+    <div class="produtos" id="produtos">
+      <div class="produtos_header">
+        <p>Produtos</p>
+      </div>
+      <!--produtos header-->
+
+      <div class="produtos_content">
+
+        <div class="produto_single">
+          <div class="produto_card">
+            <img src="https://i.imgur.com/HTx4qoU.png">
+          </div>
+          <!--produto_card-->
+
+          <div class="descricao">
+            <p>Minoxidil</p>
+
+            <div class="valores">
+              <p>R$</p>
+              <p>60,00</p>
+            </div>
+          </div>
+          <!--descricao-->
+        </div><!--produto single-->
+
+        <div class="produto_single">
+          <div class="produto_card">
+            <img src="https://i.imgur.com/HTx4qoU.png">
+          </div>
+          <!--produto_card-->
+
+          <div class="descricao">
+            <p>Minoxidil</p>
+
+            <div class="valores">
+              <p>R$</p>
+              <p>60,00</p>
+            </div>
+          </div>
+          <!--descricao-->
+        </div><!--produto single-->
+
+        <div class="produto_single">
+          <div class="produto_card">
+            <img src="https://i.imgur.com/HTx4qoU.png">
+          </div>
+          <!--produto_card-->
+
+          <div class="descricao">
+            <p>Minoxidil</p>
+
+            <div class="valores">
+              <p>R$</p>
+              <p>60,00</p>
+            </div>
+          </div>
+          <!--descricao-->
+        </div><!--produto single-->
+
+        <div class="produto_single">
+          <div class="produto_card">
+            <img src="https://i.imgur.com/HTx4qoU.png">
+          </div>
+          <!--produto_card-->
+
+          <div class="descricao">
+            <p>Minoxidil</p>
+
+            <div class="valores">
+              <p>R$</p>
+              <p>60,00</p>
+            </div>
+          </div>
+          <!--descricao-->
+        </div><!--produto single-->
+        
+      </div>
+      <!--produtos content-->
+    </div><!--produtos-->
+
+    <div class="agendamentos" id="agendamentos">
+      <p>Agendamentos</p>
+      <button class="button">Agendar</button>
+    </div><!--agendamentos-->
+
+    <footer>
+      <nav class="nav_footer">
+        <div>
+          <p>Ajuda</p>
+          <ul>
+            <li>Termos e condições</li>
+            <li>Política e privacidade</li>
+            <li>Agendamentos</li>
+          </ul>
+        </div><!--ajuda-->
+
+        <div>
+          <p>Entre em contato</p>
+          <ul>
+            <li>modernsaloon@gmail.com</li>
+            <li>(84)9 8888-8888</li>
+          </ul>
+        </div><!--entre em contato-->
+
+        <div>
+          <p>Redes sociais</p>
+          <ul>
+            <li>Instagram: @modernsaloon</li>
+          </ul>
+        </div><!--entre em contato-->
+      </nav><!--nav footer-->
+    </footer><!--footer-->
+
+  </div>
+  <!--content-->
+
+  <script type="text/javascript" src="{% static 'js/home.js' %}"></script>
 </body>
+
 </html>
