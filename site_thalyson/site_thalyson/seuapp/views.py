@@ -4,8 +4,8 @@ from http.client import HTTPResponse
 from operator import truediv
 
 from django.shortcuts import render, redirect
-from seuapp.forms import UsersForm, LoginForm
-from seuapp.models import Usuario
+from seuapp.forms import UsersForm, AgendamentoForm, LoginForm
+from seuapp.models import Usuario, Agendamento
 
 
 # Create your views here.
@@ -116,6 +116,28 @@ def doupdate(request):
 		return redirect('errorEditar')
 	form.save()
 	return redirect ('home')
+
+def agendamento(request):
+    data = {}
+    if request.method == 'POST':
+        c = Agendamento(usuario=Usuario.objects.get(id=request.session['uid']), nome = request.POST['nome'], sobrenome = request.POST['sobrenome'], celular = request.POST['celular'], data = request.POST['data'], hora = request.POST['hora'])
+        c.save()
+        return redirect('agendamento')
+    else:
+        data['agendform'] = AgendamentoForm()
+        data['history'] = Agendamento.objects.filter(usuario=request.session['uid'])
+        print(data['history'])
+        return render(request,'agendamento.html',data)
+
+def edit_coment(request, id):
+    c = Agendamento.objects.get(id=id)
+    if request.method == 'POST':
+        f = AgendamentoForm(request.POST, instance=c)
+        f.save()
+        return redirect('agendamento')
+    else:
+        f = AgendamentoForm(instance=c)
+        return render(request, 'agendamento.html',{'agendform':f})
 	
 
 

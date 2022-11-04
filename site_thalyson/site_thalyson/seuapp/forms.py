@@ -3,7 +3,7 @@ from faulthandler import disable
 from multiprocessing.resource_sharer import stop
 from django.forms import ModelForm
 from django import forms
-from seuapp.models import Usuario
+from seuapp.models import Usuario, Agendamento
 
 # Create the form class.
 class UsersForm(ModelForm):
@@ -22,6 +22,14 @@ class LoginForm(ModelForm):
         model = Usuario
         widgets = {'password': forms.PasswordInput(),}
         fields = ['usuario', 'senha']
+
+
+class AgendamentoForm(ModelForm):
+    data = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    hora = forms.TimeField(widget= forms.TimeInput(attrs={'type': 'time'}))
+    class Meta:
+        model = Agendamento
+        fields = ['nome', 'sobrenome', 'celular', 'data', 'hora']       
 
 
 

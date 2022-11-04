@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'form.css' %}">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="content">
+        <div class="left-content">
+            <form class="form" name="cad_user" method="post" action="/agendamento/"method="post" action="./">
+                {% csrf_token %}
+                <div class="form-single">
+                    <label class="label">Nome</label>
+                    {{agendform.nome}}
+                </div>
+                <div>
+                    <label class="label">Sobrenome</label>
+                    {{agendform.sobrenome}}
+                </div>
+                <div>
+                    <label class="label">Data</label>
+                    {{agendform.data}}
+                </div>
+                <div>
+                    <label class="label">Hora</label>
+                    {{agendform.hora}}
+                </div>
+                <div>
+                    <label class="label">Nº de telefone</label>
+                    {{agendform.celular}}
+                </div>
+              
+                <div id="result">
+    
+                </div>
+                <button id="btn" type="submit" class="button" disabled="true">Registrar</button>
+            </form>
+
+            <legend>Seus agendamentos</legend>
+            <div class="history">
+                {% if history %}
+                {% for c in history %}
+                <div class="informacoes">
+                    <p>
+                        {{c.data}}
+                    </p>
+                    <p>
+                        {{c.hora}}
+                    </p>
+                    <a href="{% url 'edit_coment' c.id %}">[EDITAR]</a>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+        </div>
+        <img class="img" src="https://i.imgur.com/lQ5bqwq.png">
+    </div>
+
+    <script type="text/javascript" src="{% static 'js/cadastro.js' %}"></script>
+
+</body>
+</html>
