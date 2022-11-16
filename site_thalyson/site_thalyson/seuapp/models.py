@@ -8,6 +8,7 @@ class Usuario(models.Model):
     nascimento = models.DateField()
     tel = models.CharField(max_length=15)
     senha = models.CharField(max_length=16)
+
 class Agendamento(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete = models.CASCADE)
     nome = models.CharField(max_length = 16)
@@ -15,5 +16,3 @@ class Agendamento(models.Model):
     celular = models.CharField(max_length = 15)
     data = models.DateField()
     hora = models.TimeField()
-
-

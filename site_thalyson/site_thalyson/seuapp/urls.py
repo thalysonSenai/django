@@ -17,6 +17,5 @@ urlpatterns = [
     path('perfil/', views.profile, name='perfil'),
     path('doupdate/', views.doupdate, name='doupdate'),
     path('agendamento/', views.agendamento, name='agendamento'),
-    path('edit_coment/', views.edit_coment, name='edit_coment'),
-
+    path('agendamento/<int:id>/editar',views.edit_coment, name='edit_coment'),
 ]

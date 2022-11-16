@@ -117,17 +117,24 @@ def doupdate(request):
 	form.save()
 	return redirect ('home')
 
+
 def agendamento(request):
-    data = {}
-    if request.method == 'POST':
-        c = Agendamento(usuario=Usuario.objects.get(id=request.session['uid']), nome = request.POST['nome'], sobrenome = request.POST['sobrenome'], celular = request.POST['celular'], data = request.POST['data'], hora = request.POST['hora'])
-        c.save()
-        return redirect('agendamento')
-    else:
-        data['agendform'] = AgendamentoForm()
-        data['history'] = Agendamento.objects.filter(usuario=request.session['uid'])
-        print(data['history'])
-        return render(request,'agendamento.html',data)
+	data = {}
+	data['agendform'] = AgendamentoForm()
+	if request.method == 'POST':
+		c = Agendamento(usuario=Usuario.objects.get(id=request.session['uid']), nome = request.POST['nome'], sobrenome = request.POST['sobrenome'], celular = request.POST['celular'], data = request.POST['data'], hora = request.POST['hora'])
+		try:
+			if request.POST['data'].data == c.data:
+				return redirect ("userError")
+			else:
+				c.save()
+		except: 
+			pass
+		return redirect('agendamento')
+	else:
+		data['history'] = Agendamento.objects.filter(usuario=request.session['uid'])
+		print(data['history'])
+		return render(request,'agendamento.html',data)
 
 def edit_coment(request, id):
     c = Agendamento.objects.get(id=id)

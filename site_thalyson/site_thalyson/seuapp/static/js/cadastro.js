@@ -46,7 +46,7 @@ function formatNumber() {
         num.value = num.value + ") "
     }
 
-    if (tam >= 5 && tam <= 6) {
+    if (tam >= 10 && tam <= 11) {
         tam++
         num.innerText = String(num.value).substring(0, 10) + "-"
         num.value = num.value + "-"
