@@ -85,13 +85,28 @@ body {
   height: 90px;
 }
 
-a {
+a{
   color: var(--text-color);
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {
   color: orange;
+}
+
+#agendeAgora {
+  font-size: 20px;
+
+  position: relative;
+  top: -257px;
+  left: 165px;
+
+  color: orange;
+}
+
+#agendeAgora:hover {
+  color: var(--text-color);
 }
 
 .body-header {
@@ -126,6 +141,10 @@ a:hover {
   font-size: 2rem;
 }
 
+.body-header>div>p:nth-child(3) {
+  font-size: 20px;
+}
+
 .body-header>div>p:nth-child(2),
 .about_content>p:nth-child(1),
 .equipe_header>p:nth-child(2),
@@ -151,7 +170,7 @@ a:hover {
   background-position: 140px 10px;
   background-repeat: no-repeat;
 
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .about>img {

@@ -11,6 +11,7 @@ class UsersForm(ModelForm):
     confirma_senha = forms.CharField(widget=forms.PasswordInput)
     confirma_nova_senha = forms.CharField(widget=forms.PasswordInput)
     nascimento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    tel = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Digite seu número de telefone', 'onkeypress': 'formatNumber(event)', 'maxlength': '15', 'required' : 'True'}))
     class Meta:
         model = Usuario
         widgets = {'password': forms.PasswordInput(),}

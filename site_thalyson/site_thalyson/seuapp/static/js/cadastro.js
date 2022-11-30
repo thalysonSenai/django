@@ -31,25 +31,30 @@ function confereUser() {
     Ajustando a formatação do numero de telefone
 */
 
-let num = document.getElementById("id_tel"); 
-num.setAttribute("onkeyup", "formatNumber()");
-num.innerText = "("
-num.value = "("
 
-let tam = 0;
-
-function formatNumber() {
-    tam++
-    if (tam >= 2 && tam <= 3) {
-        tam++
-        num.innerText = String(num.value).substring(0, 5) + ")"
-        num.value = num.value + ") "
+function formatNumber(evento) {
+    const padrao = /[0-9]/
+    var tecla = evento.key
+    if (!padrao.test(tecla)) {
+        return evento.preventDefault()
     }
+}
 
-    if (tam >= 10 && tam <= 11) {
-        tam++
-        num.innerText = String(num.value).substring(0, 10) + "-"
-        num.value = num.value + "-"
+function formatNumber(evento) {
+    const padrao = /[0-9]/
+    var tecla = evento.key
+    if (!padrao.test(tecla)) {
+        return evento.preventDefault()
+    }
+    let txt = document.getElementById('id_tel')
+    if (txt.value.length == '') {
+        txt.value += "("
+    }
+    if (txt.value.length == 3) {
+        txt.value += ") "
+    }
+    if (txt.value.length == 10) {
+        txt.value += "-"
     }
 }
 

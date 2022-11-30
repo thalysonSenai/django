@@ -3,10 +3,10 @@ from faulthandler import disable
 from http.client import HTTPResponse
 from operator import truediv
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from seuapp.forms import UsersForm, AgendamentoForm, LoginForm
 from seuapp.models import Usuario, Agendamento
-
+from datetime import datetime
 
 # Create your views here.
 def dologout(request):
@@ -57,6 +57,9 @@ def errorEditar(request):
 	data = {}
 	return render(request,'errorEditar.html',data)
 
+def agendErro(request):
+	data = {}
+	return render(request,'agendErro.html',data)
 
 def logout(request):
 	data = {}
@@ -118,33 +121,38 @@ def doupdate(request):
 	return redirect ('home')
 
 
-def agendamento(request):
+def agendamento(request):	
 	data = {}
 	data['agendform'] = AgendamentoForm()
-	if request.method == 'POST':
-		c = Agendamento(usuario=Usuario.objects.get(id=request.session['uid']), nome = request.POST['nome'], sobrenome = request.POST['sobrenome'], celular = request.POST['celular'], data = request.POST['data'], hora = request.POST['hora'])
-		try:
-			if request.POST['data'].data == c.data:
-				return redirect ("userError")
-			else:
-				c.save()
-		except: 
-			pass
-		return redirect('agendamento')
-	else:
-		data['history'] = Agendamento.objects.filter(usuario=request.session['uid'])
-		print(data['history'])
-		return render(request,'agendamento.html',data)
+	try:
+		if request.method == 'POST':
+				c = Agendamento(usuario=Usuario.objects.get(id=request.session['uid']), nome = request.POST['nome'], sobrenome = request.POST['sobrenome'], celular = request.POST['celular'], data = request.POST['data'], hora = request.POST['hora'])
+				data_convertida = datetime.strptime(request.POST['data'], '%Y-%m-%d').date()
+				if data_convertida < datetime.now().date():
+					return redirect ("agendErro")
+				else:
+					c.save()
+		else:
+			data['history'] = Agendamento.objects.filter(usuario=request.session['uid'])
+			print(data['history'])
+			return render(request,'agendamento.html',data)
+	except:
+		return redirect("login")
+	return redirect('agendamento')
 
 def edit_coment(request, id):
-    c = Agendamento.objects.get(id=id)
-    if request.method == 'POST':
-        f = AgendamentoForm(request.POST, instance=c)
-        f.save()
-        return redirect('agendamento')
-    else:
-        f = AgendamentoForm(instance=c)
-        return render(request, 'agendamento.html',{'agendform':f})
+	c = Agendamento.objects.get(id=id)
+	if request.method == 'POST':
+		f = AgendamentoForm(request.POST, instance=c)
+		data_convertida = datetime.strptime(request.POST['data'], '%Y-%m-%d').date()
+		if data_convertida < datetime.now().date():
+			return redirect ("agendErro")
+		else:
+			f.save()
+			return redirect('agendamento')
+	else:
+		f = AgendamentoForm(instance=c)
+		return render(request, 'agendamento.html',{'agendform':f})
 	
 
 

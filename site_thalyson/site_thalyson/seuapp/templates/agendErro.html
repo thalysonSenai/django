@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'erro.css' %}">
+  <title>Data inválida</title>
+</head>
+
+<body>
+  <div class="error">
+    <p>Data inválida</p>
+    <button id="result" class="button">3</button>
+  </div>
+
+  <script>
+    let count = 0;
+    let result = document.getElementById("result");
+
+    function contTimer() {
+      if (count == 0) {
+        count++
+        result.innerText = "3"
+        setTimeout(() => { contTimer() }, 1000)
+      } else if (count == 1) {
+        count++
+        result.innerText = "2"
+        setTimeout(() => { contTimer() }, 1000)
+      } else if (count == 2) {
+        result.innerText = "1"
+        window.location.href = "/agendamento/"
+      }
+    }
+
+    contTimer()
+  </script>
+</body>
+
+</html>
