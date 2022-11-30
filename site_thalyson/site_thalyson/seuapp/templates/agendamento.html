@@ -34,24 +34,39 @@
             <label class="label">Nº de telefone</label>
             {{agendform.celular}}
           </div>
+          <div>
+            <label class="label">Barbeiro</label>
+            {{agendform.funcionarios}}
+          </div>
           <div id="result"></div>
-          <button id="btn" type="submit" class="button">Agendar</button>
+          
+          
+          <legend>Serviços</legend>
+          <div class="label">
+            <fieldset>
+              {% for s in servicoform %}
+              <p><input type="checkbox" id="{{s.id}}" name="servico-{{s.id}}"> <b>R${{s.valor}}</b>{{s.servico}}</p>
+              {% endfor %}
+            </div>
+            <button type="submit" class="button">Agendar</button>
+          </div>
         </form>
-      </div>
-      <img class="img" src="https://i.imgur.com/lQ5bqwq.png" />
+          <img class="img" src="https://i.imgur.com/lQ5bqwq.png" />
     </div>
+    
     <div class="history">
-        <h2>Histórico</h2>
+      <h2>Histórico</h2>
       {% if history %} 
-        <div>
-            {% for c in history %}
-                <div class="informacoes">
-                    <p>{{c.data}}</p>
-                    <p>{{c.hora}}</p>
-                    <a href="{% url 'edit_coment' c.id %}">[EDITAR]</a>
-                </div>
-            {% endfor %} 
+      <div>
+        {% for c in history %}
+        <div class="informacoes">
+          <p>{{c.data}}</p>
+          <p>{{c.hora}}</p>
+          <a href="{% url 'edit_agend' c.id %}">[EDITAR]</a>
+          <a href="{% url 'agend_delete' c.id %}">[DELETAR]</a>
         </div>
+        {% endfor %} 
+      </div>
       {% endif %}
     </div>
   </body>

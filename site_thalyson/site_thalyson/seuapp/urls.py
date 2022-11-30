@@ -18,5 +18,6 @@ urlpatterns = [
     path('perfil/', views.profile, name='perfil'),
     path('doupdate/', views.doupdate, name='doupdate'),
     path('agendamento/', views.agendamento, name='agendamento'),
-    path('agendamento/<int:id>/editar',views.edit_coment, name='edit_coment'),
+    path('agendamento/<int:id>/editar',views.edit_agend, name='edit_agend'),
+    path('agend_delete/<int:id>/deletar',views.agend_delete, name='agend_delete'),
 ]

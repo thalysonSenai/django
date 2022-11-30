@@ -4,8 +4,8 @@ from http.client import HTTPResponse
 from operator import truediv
 
 from django.shortcuts import render, redirect, HttpResponse
-from seuapp.forms import UsersForm, AgendamentoForm, LoginForm
-from seuapp.models import Usuario, Agendamento
+from seuapp.forms import UsersForm, AgendamentoForm, LoginForm, ServicosForm
+from seuapp.models import Usuario, Agendamento, Servicos, Servicos_preenchido
 from datetime import datetime
 
 # Create your views here.
@@ -123,16 +123,24 @@ def doupdate(request):
 
 def agendamento(request):	
 	data = {}
-	data['agendform'] = AgendamentoForm()
+	data['servicoform'] = Servicos.objects.all()
 	try:
 		if request.method == 'POST':
-				c = Agendamento(usuario=Usuario.objects.get(id=request.session['uid']), nome = request.POST['nome'], sobrenome = request.POST['sobrenome'], celular = request.POST['celular'], data = request.POST['data'], hora = request.POST['hora'])
 				data_convertida = datetime.strptime(request.POST['data'], '%Y-%m-%d').date()
 				if data_convertida < datetime.now().date():
 					return redirect ("agendErro")
 				else:
+					c = Agendamento(usuario=Usuario.objects.get(id=request.session['uid']), nome = request.POST['nome'], sobrenome = request.POST['sobrenome'], celular = request.POST['celular'], data = request.POST['data'], hora = request.POST['hora'])
 					c.save()
+				for i in request.POST:
+					if i.find("-")!=-1:
+						print(i)
+						sid = i.split("-")
+						s = Servicos_preenchido.objects.create(servico=Servicos.objects.get(id=sid[1]), agendamento=c)
+						s.save()
+				return redirect('agendamento')
 		else:
+			data['agendform'] = AgendamentoForm()
 			data['history'] = Agendamento.objects.filter(usuario=request.session['uid'])
 			print(data['history'])
 			return render(request,'agendamento.html',data)
@@ -140,20 +148,29 @@ def agendamento(request):
 		return redirect("login")
 	return redirect('agendamento')
 
-def edit_coment(request, id):
+def edit_agend(request, id):
 	c = Agendamento.objects.get(id=id)
+	d = Servicos_preenchido.objects.get(id=id)
+	data = {}
 	if request.method == 'POST':
 		f = AgendamentoForm(request.POST, instance=c)
+		d = ServicosForm(request.POST, instance=d)
 		data_convertida = datetime.strptime(request.POST['data'], '%Y-%m-%d').date()
 		if data_convertida < datetime.now().date():
 			return redirect ("agendErro")
 		else:
 			f.save()
-			return redirect('agendamento')
+			d.save()
+			return render(request, 'agendamento.html', data)
 	else:
 		f = AgendamentoForm(instance=c)
 		return render(request, 'agendamento.html',{'agendform':f})
 	
+def agend_delete(request, id):
+    c =Agendamento.objects.get(id=id)
+    c.delete()
+    return redirect('agendamento')
+
 
 
 
