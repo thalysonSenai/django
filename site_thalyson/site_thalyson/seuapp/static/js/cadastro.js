@@ -50,6 +50,11 @@ function formatNumber(evento) {
     if (txt.value.length == '') {
         txt.value += "("
     }
+
+    if (txt.value.length == 1 && !txt.value.includes("(")) {
+        txt.value = "(" + txt.value.substring(0)
+    }
+
     if (txt.value.length == 3) {
         txt.value += ") "
     }
