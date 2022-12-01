@@ -61,6 +61,12 @@ def agendErro(request):
 	data = {}
 	return render(request,'agendErro.html',data)
 
+def historico(request):
+	data = {}
+	data['history'] = Agendamento.objects.filter(usuario=request.session['uid'])
+	print(data['history'])
+	return render(request,'historico.html',data)
+
 def logout(request):
 	data = {}
 	return render(request,'logout.html',data)
@@ -150,7 +156,7 @@ def agendamento(request):
 
 def edit_agend(request, id):
 	c = Agendamento.objects.get(id=id)
-	d = Servicos_preenchido.objects.get(id=id)
+	d = Servicos_preenchido.objects.filter(id=id)
 	data = {}
 	if request.method == 'POST':
 		f = AgendamentoForm(request.POST, instance=c)

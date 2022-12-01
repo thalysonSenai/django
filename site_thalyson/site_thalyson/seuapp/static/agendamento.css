@@ -1,15 +1,44 @@
-.history{
-    width: 50%;
-    margin: 50px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+:root {
+    --bg-body: #121212;
+    --bg-body-800: #222222;
+    --bg-body-500: #555555;
+    --bg-button: #ffa500;
+    --text-link-color: #ffa500;
+    --text-color: #fff;
 }
 
-.history > div{
+.content {
+    justify-content: center !important;
+}
+
+.form {
+    width: 600px !important;
+}
+
+#servico {
+    width: 270px;
+    margin: 10px 0;
+    padding: 5px;
+}
+
+#servico > div {
+    box-sizing: border-box;
+
+    padding: 0 20px;
+    margin: 5px 0;
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-around;
-    margin: 20px 0;
+    align-items: center;
+    
+    justify-content: space-between;
+}
+
+#servico > div > input {
+    width: 20px;
+    height: 20px;
+}
+
+#servico > div > span {
+    display: flex;
+    justify-content: flex-start;
+    width: 190px;
 }

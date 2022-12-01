@@ -12,6 +12,7 @@ urlpatterns = [
     path('novaSenha/', views.novaSenha, name='novaSenha'),
     path('errorLogin/', views.errorLogin, name='errorLogin'),
     path('errorEditar/', views.errorEditar, name='errorEditar'),
+    path('historico/', views.historico, name='historico'),
     path('agendErro/', views.agendErro, name='agendErro'),
     path('dologout/', views.dologout, name='dologout'),
     path('logout/', views.logout, name='logout'),

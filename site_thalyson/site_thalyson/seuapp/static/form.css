@@ -61,7 +61,9 @@ body {
   margin-left: 15px;
 }
 
-.form > div > input {
+.form > div > input,
+#id_hora,
+#id_funcionarios {
   width: 250px;
   height: 30px;
   padding: 0 10px;
